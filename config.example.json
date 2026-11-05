@@ -1,0 +1,8 @@
+{
+  "owner_id": 123456789,
+  "access": "owner",
+  "allowed_ids": [],
+  "recipient_id": 0,
+  "launch_at": "2026-12-31T00:00:00",
+  "operator_language": "en"
+}

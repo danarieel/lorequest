@@ -1,0 +1,14 @@
+.env
+config.json
+data/
+*.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+# private packs and generated art stay local
+packs_private/
+packs/**/*.jpg
+packs/**/*.jpeg
+packs/**/*.png
+packs/**/*.webp
