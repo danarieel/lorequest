@@ -294,15 +294,6 @@ Full reference: [docs/pack-format.md](docs/pack-format.md).
 
 **With `/create`.** Send `/create` to the bot and answer three questions: topic, number of scenes (2-6), the hero's name. The model designs the story frame and each scene as small schema-constrained JSON objects, every object is checked (a rejected answer goes back to the model with the error, up to 3 attempts), and the code assembles the pack, validates it with the same `Pack` class and saves it to `packs/generated/<name>/pack.yaml`. The language follows the topic. To play the pack, restart the bot with `--pack` (the bot prints the command).
 
-### What broke and how I fixed it
-
-| Problem | Cause | Fix |
-|---|---|---|
-| [SPECIFY] | [SPECIFY] | [SPECIFY] |
-| [SPECIFY] | [SPECIFY] | [SPECIFY] |
-| [SPECIFY] | [SPECIFY] | [SPECIFY] |
-| [SPECIFY] | [SPECIFY] | [SPECIFY] |
-
 ### Tests
 
 ```powershell
