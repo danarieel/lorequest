@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1426" viewBox="0 0 760 1426" role="img" aria-label="Sample session with the The Last Light pack">
+<style>
+text{font-family:-apple-system,"Segoe UI",Roboto,"Noto Sans",Helvetica,Arial,sans-serif;font-size:15px;fill:#e8eef5}
+.m{animation:show 25s infinite both}
+@keyframes show{0%{opacity:0;transform:translateY(8px)}3%{opacity:1;transform:none}94%{opacity:1;transform:none}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.m{animation:none}}
+</style>
+<rect width="760" height="1426" rx="18" fill="#0e1621"/>
+<rect width="760" height="62" rx="18" fill="#17212b"/><rect y="40" width="760" height="22" fill="#17212b"/>
+<circle cx="44" cy="31" r="19" fill="#2b5278"/><text x="44" y="38" text-anchor="middle" style="font-size:20px">🔦</text>
+<text x="76" y="28" font-weight="700">The Last Light</text>
+<text x="76" y="47" style="font-size:12px;fill:#6c7f93">bot</text>
+<g class="m" style="animation-delay:0.0s">
+<rect x="28" y="84" width="387" height="62" rx="14" fill="#182533"/>
+<text x="43" y="109" font-weight="700">🔦 [THE LAST LIGHT]</text>
+<text x="43" y="131">A storm. A tower. Someone is waiting, traveler.</text>
+<rect x="28" y="154" width="90" height="30" rx="9" fill="#1f2f43" stroke="#34506e"/><text x="73.0" y="174" text-anchor="middle" fill="#cfe0f2">Approach</text>
+</g>
+<g class="m" style="animation-delay:1.6s">
+<rect x="622" y="198" width="110" height="40" rx="14" fill="#2b5278"/>
+<text x="637" y="223">Approach</text>
+</g>
+<g class="m" style="animation-delay:3.2s">
+<rect x="28" y="252" width="455" height="260" rx="14" fill="#182533"/>
+<text x="43" y="277" font-weight="700">🌊 CHAPTER 1: The Landing.</text>
+<text x="43" y="299">The storm has thrown your boat onto the rocks. Above you</text>
+<text x="43" y="321">stands a lighthouse with its lamp dark, and a single</text>
+<text x="43" y="343">window glows halfway up the tower. The door is locked,</text>
+<text x="43" y="365">yet someone is waiting behind it.</text>
+<text x="43" y="409">What do you do, traveler?</text>
+<text x="43" y="431">1. Knock on the door of the lighthouse.</text>
+<text x="43" y="453">2. Climb the cliff path toward the glowing window.</text>
+<text x="43" y="475">3. Light a signal fire on the rocks.</text>
+<text x="43" y="497">4. Describe your own plan.</text>
+</g>
+<g class="m" style="animation-delay:4.8s">
+<rect x="622" y="526" width="110" height="40" rx="14" fill="#2b5278"/>
+<text x="637" y="551">3</text>
+</g>
+<g class="m" style="animation-delay:6.4s">
+<rect x="28" y="580" width="455" height="194" rx="14" fill="#182533"/>
+<text x="43" y="605">🗣 The Keeper: ✦ The Keeper has watched driftwood burn on</text>
+<text x="43" y="627">that shore before, traveler. Nothing came of it but</text>
+<text x="43" y="649">smoke.</text>
+<text x="43" y="693" fill="#8da2b8">📜 The Keeper recalls: «beacon» comes from Old English</text>
+<text x="43" y="715" fill="#8da2b8">«bēacen», «sign, signal».</text>
+<text x="43" y="759">⏳ Take in the Keeper's words, traveler.</text>
+<rect x="28" y="782" width="90" height="30" rx="9" fill="#1f2f43" stroke="#34506e"/><text x="73.0" y="802" text-anchor="middle" fill="#cfe0f2">Continue</text>
+</g>
+<g class="m" style="animation-delay:8.0s">
+<rect x="622" y="826" width="110" height="40" rx="14" fill="#2b5278"/>
+<text x="637" y="851">Continue</text>
+</g>
+<g class="m" style="animation-delay:9.6s">
+<rect x="28" y="880" width="296" height="84" rx="14" fill="#182533"/>
+<text x="43" y="905" font-weight="700">🔦 CHAPTER 2: The Lamp Room.</text>
+<text x="43" y="927">The great lens is cracked and cold.</text>
+<text x="43" y="949" fill="#8da2b8">…</text>
+</g>
+<g class="m" style="animation-delay:11.2s">
+<rect x="622" y="978" width="110" height="40" rx="14" fill="#2b5278"/>
+<text x="637" y="1003">4</text>
+</g>
+<g class="m" style="animation-delay:12.8s">
+<rect x="28" y="1032" width="372" height="40" rx="14" fill="#182533"/>
+<text x="43" y="1057">The Keeper listens. What do you do, traveler?</text>
+</g>
+<g class="m" style="animation-delay:14.4s">
+<rect x="581" y="1086" width="151" height="40" rx="14" fill="#2b5278"/>
+<text x="596" y="1111">burn the logbook</text>
+</g>
+<g class="m" style="animation-delay:16.0s">
+<rect x="28" y="1140" width="455" height="172" rx="14" fill="#182533"/>
+<text x="43" y="1165">🗣 The Keeper: ✦ The Keeper approves of the fire and</text>
+<text x="43" y="1187">doubts the reason, traveler. Paper is a poor witness.</text>
+<text x="43" y="1231" font-style="italic">🌀 ✦ The pages curl, the night tears at the seam, and the</text>
+<text x="43" y="1253" font-style="italic">tower swallows the flame whole.</text>
+<text x="43" y="1297">⏳ Take in the Keeper's words, traveler.</text>
+<rect x="28" y="1320" width="68" height="30" rx="9" fill="#1f2f43" stroke="#34506e"/><text x="62.0" y="1340" text-anchor="middle" fill="#cfe0f2">Go on</text>
+</g>
+<text x="380.0" y="1382" text-anchor="middle" style="font-size:12px;fill:#6c7f93">Illustrative session. Authored text comes from packs/lighthouse;</text>
+<text x="380.0" y="1400" text-anchor="middle" style="font-size:12px;fill:#6c7f93">lines marked ✦ are model output and differ from run to run.</text>
+</svg>
