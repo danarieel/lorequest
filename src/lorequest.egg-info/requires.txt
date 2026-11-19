@@ -1,4 +1,0 @@
-aiogram<4,>=3.4
-aiohttp>=3.9
-apscheduler<4,>=3.10
-pyyaml>=6

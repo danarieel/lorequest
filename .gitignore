@@ -13,3 +13,6 @@ packs/**/*.jpg
 packs/**/*.jpeg
 packs/**/*.png
 packs/**/*.webp
+*.egg-info/
+build/
+dist/
