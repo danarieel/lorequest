@@ -159,6 +159,63 @@ def test_chat_json_http_layer():
     assert len(seen) == 2 and "think" not in seen[1]                    # retried without `think`
 
 
+def test_input_normalisation_is_shared_by_bot_and_cli():
+    assert g.normalize_topic("  A   haunted\nlighthouse ") == "A haunted lighthouse"
+    assert g.normalize_topic("/start") is None and g.normalize_topic("ab") is None and g.normalize_topic("x" * 201) is None
+    assert g.normalize_hero("Alex") == "Alex" and g.normalize_hero("Анна-Мария") == "Анна-Мария"
+    assert g.normalize_hero("A<b>") is None and g.normalize_hero("{x}") is None and g.normalize_hero("A") is None
+
+
+def test_cli_asks_every_item_interactively():
+    """tools/generate_pack.py with NO options: it must ask for the model, topic, scenes, hero, confirmation, then generate."""
+    import subprocess
+    import tempfile
+    import threading
+
+    req = g.GenRequest("A haunted lighthouse", 2, "Alex")
+    counter = {"scene": 0}
+
+    async def tags(_):
+        return web.json_response({"models": [{"name": "fake:1b"}]})
+
+    async def chat(request):
+        props = (await request.json())["format"]["properties"]
+        if "outline" in props:
+            return web.json_response({"message": {"content": gen_fakes.dumps(gen_fakes.frame(req))}})
+        counter["scene"] += 1
+        return web.json_response({"message": {"content": gen_fakes.dumps(gen_fakes.scene(req, counter["scene"]))}})
+
+    loop, ready, stop = asyncio.new_event_loop(), threading.Event(), {}
+
+    def serve():
+        asyncio.set_event_loop(loop)
+        app = web.Application()
+        app.router.add_get("/api/tags", tags)
+        app.router.add_post("/api/chat", chat)
+        runner = web.AppRunner(app)
+        loop.run_until_complete(runner.setup())
+        site = web.TCPSite(runner, "127.0.0.1", 0)
+        loop.run_until_complete(site.start())
+        stop["port"] = site._server.sockets[0].getsockname()[1]
+        ready.set()
+        loop.run_forever()
+
+    threading.Thread(target=serve, daemon=True).start()
+    assert ready.wait(10)
+    try:
+        answers = "\n".join(["", "x", "A haunted lighthouse", "9", "2", "A<b>", "Alex", "y", "n"]) + "\n"  # bad inputs first
+        with tempfile.TemporaryDirectory() as tmp:
+            r = subprocess.run([sys.executable, str(ROOT / "tools" / "generate_pack.py"), "--lang", "en", "--out", tmp,
+                                "--url", f"http://127.0.0.1:{stop['port']}"], input=answers, capture_output=True, text=True, timeout=60)
+            assert r.returncode == 0, r.stdout + r.stderr
+            assert "Not valid" in r.stdout                                    # bad topic / scene count / name were re-asked
+            assert "Topic:  A haunted lighthouse" in r.stdout and "Hero:   Alex" in r.stdout
+            folders = list(Path(tmp).iterdir())
+            assert len(folders) == 1 and len(Pack.load(folders[0]).locations) == 2
+    finally:
+        loop.call_soon_threadsafe(loop.stop)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

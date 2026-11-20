@@ -5,7 +5,6 @@ import asyncio
 import html
 import logging
 import random
-import re
 from datetime import datetime, timezone
 
 from aiogram import BaseMiddleware, Bot, Dispatcher, F, types
@@ -20,7 +19,8 @@ from aiogram.utils.chat_action import ChatActionSender
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from ..config import Settings
-from ..core.generator import MAX_SCENES, MIN_SCENES, GenerationCancelled, GenerationError, GenRequest, generate_pack
+from ..core.generator import (MAX_SCENES, MIN_SCENES, GenerationCancelled, GenerationError, GenRequest, generate_pack,
+                              normalize_hero, normalize_topic)
 from ..core.llm import LLM
 from .messages import t
 from ..core.pack import Location, Pack
@@ -391,8 +391,8 @@ class QuestApp:
 
         @dp.message(Create.topic, F.text)
         async def create_topic(message: types.Message, state: FSMContext):
-            topic = re.sub(r"\s+", " ", message.text).strip()
-            if topic.startswith("/") or not 3 <= len(topic) <= 200:
+            topic = normalize_topic(message.text)
+            if topic is None:
                 await message.answer(T("create_bad_topic"))
                 return
             await state.update_data(topic=topic)
@@ -412,9 +412,8 @@ class QuestApp:
 
         @dp.message(Create.hero, F.text)
         async def create_hero(message: types.Message, state: FSMContext):
-            hero = re.sub(r"\s+", " ", message.text).strip()
-            # letters/digits/space/hyphen/apostrophe only: the name goes into prompts and into Telegram HTML
-            if not re.fullmatch(r"[\w' -]{2,30}", hero):
+            hero = normalize_hero(message.text)  # letters/digits/space/hyphen only (goes into prompts and HTML)
+            if hero is None:
                 await message.answer(T("create_bad_hero"))
                 return
             await state.update_data(hero=hero)

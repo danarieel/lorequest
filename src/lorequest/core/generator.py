@@ -43,6 +43,22 @@ REPAIR_ATTEMPTS = 3            # how many times the model may try to fix a rejec
 ProgressCb = Callable[[str, int, int], Awaitable[None]]   # (stage, index, total); stage: frame | scene | save
 
 
+TOPIC_MIN, TOPIC_MAX = 3, 200
+_HERO_RE = re.compile(r"[\w' -]{2,30}")
+
+
+def normalize_topic(raw: str) -> str | None:
+    """Collapse whitespace; None if the topic is unusable (too short/long, or it looks like a command)."""
+    topic = re.sub(r"\s+", " ", raw or "").strip()
+    return topic if TOPIC_MIN <= len(topic) <= TOPIC_MAX and not topic.startswith("/") else None
+
+
+def normalize_hero(raw: str) -> str | None:
+    """Hero name: 2-30 letters, digits, spaces, hyphens or apostrophes (it goes into prompts and Telegram HTML)."""
+    hero = re.sub(r"\s+", " ", raw or "").strip()
+    return hero if _HERO_RE.fullmatch(hero) else None
+
+
 class GenerationError(RuntimeError):
     """The pack could not be generated (the message is safe to show to the user)."""
 
@@ -90,7 +106,8 @@ LANG: dict[str, dict] = {
                     "Do not add new characters or places. Call the player \"<<HERO>>\"."),
         "verdict_format": "⚖️ <b>The verdict:</b> <i>{verdict}</i>",
         "free": ("(FREE CHAT. The quest is over. You are still <<NARRATOR>>; call the user \"<<HERO>>\". "
-                 "You may discuss anything. NEVER invent facts: if unsure, say so. No lists, no emoji, 2-4 sentences.)"),
+                 "You may discuss anything. NEVER invent facts: if unsure, say so. Reply in the language the user writes in. "
+                 "No lists, no emoji, 2-4 sentences.)"),
         "forbidden": [r"\bas an ai\b", r"language model"],
         "ui": {
             "intro": "📜 <code>[<<TITLE>>]</code>\nA new story begins, <<HERO>>.",
@@ -141,7 +158,7 @@ LANG: dict[str, dict] = {
         "verdict_format": "⚖️ <b>Вердикт:</b> <i>{verdict}</i>",
         "free": ("(СВОБОДНАЯ БЕСЕДА. Квест окончен. Ты по-прежнему <<NARRATOR>>, собеседника зовёшь «<<HERO>>». "
                  "Можно говорить о чём угодно. НИКОГДА не выдумывай фактов: если не уверен, так и скажи. "
-                 "Без списков и эмодзи, 2-4 предложения.)"),
+                 "Отвечай на языке собеседника. Без списков и эмодзи, 2-4 предложения.)"),
         "forbidden": [r"как языковая модель", r"как ии\b", r"language model"],
         "ui": {
             "intro": "📜 <code>[<<TITLE>>]</code>\nНачинается новая история, <<HERO>>.",
