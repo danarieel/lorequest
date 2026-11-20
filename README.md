@@ -146,6 +146,7 @@ python tests\test_pack.py        # валидация паков
 python tests\test_generator.py   # генератор: валидаторы, цикл исправлений, сохранение, HTTP-слой
 python tests\flow_test.py        # весь квест и диалог /create; Telegram и модель подменены
 python tools\eval_models.py --pack packs/lighthouse модель1 модель2   # сравнение моделей, eval_results.md
+python tools/generate_pack.py   # интерактивная генерация пака без Telegram
 ```
 
 ### Планы
